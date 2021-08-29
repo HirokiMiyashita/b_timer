@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import {
   makeStyles,
@@ -13,8 +13,7 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Close from "@material-ui/icons/Close";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -58,7 +57,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center",
       padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
       ...theme.mixins.toolbar,
       justifyContent: "flex-end",
     },
@@ -71,14 +69,20 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
       marginLeft: -drawerWidth,
     },
+    date: {
+      border: "sored red 1px",
+      marginLeft: "4.2em",
+    },
   })
 );
 
 export default function Head() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = useState(false);
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -106,8 +110,8 @@ export default function Head() {
             <MenuIcon />
           </IconButton>
           {/* Headタイトル */}
-          <Typography variant="h6" noWrap>
-            Persistent drawer
+          <Typography variant="h6" noWrap className={classes.date}>
+            {month}月{day}日
           </Typography>
           {/* Headタイトル */}
         </Toolbar>
@@ -125,14 +129,14 @@ export default function Head() {
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               // バツのアイコンに変更
-              <ChevronLeftIcon />
+              <Close />
             ) : (
-              <ChevronRightIcon />
+              <Close />
             )}
           </IconButton>
         </div>
         <List>
-          {["ホーム", "Starred"].map((text) => (
+          {["ホーム", "レコード"].map((text) => (
             <ListItem button key={text}>
               <ListItemIcon>
                 <InboxIcon />
