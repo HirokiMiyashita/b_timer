@@ -4,6 +4,6 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/component/WaterBall": "pages/component/WaterBall.js",
-  "/component/Calculations/Data": "pages/component/Calculations/Data.js"
+  "/component/Calculations/Data": "pages/component/Calculations/Data.js",
+  "/component/WaterBall": "pages/component/WaterBall.js"
 }

@@ -62,10 +62,10 @@ const WaterBall: React.VFC = () => {
   }, []);
 
   const dateMove = () => {
-    router.push({
-      pathname: "./Calculations/Data",
-      query: { count },
-    });
+        router.push({
+          pathname: "./Calculations/Data",
+          query: { count },
+        });
   };
   console.log(count);
   return (
