@@ -3,6 +3,19 @@ import { useState, useCallback, useRef } from "react";
 import Typography from "@material-ui/core/Typography";
 import Head from "../component/Head/Head";
 import Button from "@material-ui/core/Button";
+import API, { graphqlOperation } from "@aws-amplify/api";
+import PubSub from "@aws-amplify/pubsub";
+import { createTodo } from "../../src/graphql/mutations";
+import { listTodos } from "../../src/graphql/queries";
+import { onCreateTodo } from "../../src/graphql/subscriptions";
+
+import awsconfig from "../../src/aws-exports";
+API.configure(awsconfig);
+PubSub.configure(awsconfig);
+
+// Action Types
+const QUERY = "QUERY";
+const SUBSCRIPTION = "SUBSCRIPTION";
 import {
   makeStyles,
   useTheme,
@@ -35,6 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+async function createdata() {
+  const todo = { name: "Use AWS AppSync", description: "RealTime and Offline" };
+  await API.graphql(graphqlOperation(createTodo, { input: todo }));
+  console.log("登録");
+}
 
 const WaterBall: React.VFC = () => {
   // 値の初期設定
@@ -62,10 +80,11 @@ const WaterBall: React.VFC = () => {
   }, []);
 
   const dateMove = () => {
-        router.push({
-          pathname: "./Calculations/Data",
-          query: { count },
-        });
+    createdata();
+    router.push({
+      pathname: "./Calculations/Data",
+      query: { count },
+    });
   };
   console.log(count);
   return (
