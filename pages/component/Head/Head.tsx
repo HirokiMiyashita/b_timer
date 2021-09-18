@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/dist/client/router";
 import clsx from "clsx";
 import {
   makeStyles,
@@ -18,6 +19,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import AddIcon from "@material-ui/icons/Add";
 
 const drawerWidth = 200;
 
@@ -60,18 +62,12 @@ const useStyles = makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
       justifyContent: "flex-end",
     },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: -drawerWidth,
-    },
     date: {
       border: "sored red 1px",
       marginLeft: "4.2em",
+    },
+    marginL: {
+      marginLeft: "2rem",
     },
   })
 );
@@ -136,6 +132,12 @@ export default function Head() {
           </IconButton>
         </div>
         <List>
+          <ListItem>
+            <ListItemIcon>
+              <AddIcon />
+              <ListItemText primary="項目追加" className={classes.marginL} />
+            </ListItemIcon>
+          </ListItem>
           {["ホーム", "レコード"].map((text) => (
             <ListItem button key={text}>
               <ListItemIcon>

@@ -1,29 +1,23 @@
 import { useRouter } from "next/dist/client/router";
 import { useState, useCallback, useRef } from "react";
-import Typography from "@material-ui/core/Typography";
 import Head from "../component/Head/Head";
 import Button from "@material-ui/core/Button";
 import API, { graphqlOperation } from "@aws-amplify/api";
 import PubSub from "@aws-amplify/pubsub";
 import { createTodo } from "../../src/graphql/mutations";
 import { listTodos } from "../../src/graphql/queries";
-import { onCreateTodo } from "../../src/graphql/subscriptions";
 
 import awsconfig from "../../src/aws-exports";
 API.configure(awsconfig);
 PubSub.configure(awsconfig);
 
-// Action Types
-const QUERY = "QUERY";
-const SUBSCRIPTION = "SUBSCRIPTION";
-import {
-  makeStyles,
-  useTheme,
-  Theme,
-  createStyles,
-} from "@material-ui/core/styles";
+// // Action Types
+// const QUERY = "QUERY";
+// const SUBSCRIPTION = "SUBSCRIPTION";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { getDefaultState } from "react-query/types/core/mutation";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     positionL: {
       width: "30%",
@@ -48,8 +42,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-async function createdata() {
-  const todo = { name: "Use AWS AppSync", description: "RealTime and Offline" };
+async function createdata(description: number) {
+  const todo = {
+    name: "ゲスト",
+    description: description,
+  };
   await API.graphql(graphqlOperation(createTodo, { input: todo }));
   console.log("登録");
 }
@@ -80,12 +77,13 @@ const WaterBall: React.VFC = () => {
   }, []);
 
   const dateMove = () => {
-    createdata();
+    createdata(count);
     router.push({
       pathname: "./Calculations/Data",
       query: { count },
     });
   };
+  console.log(router.pathname);
   console.log(count);
   return (
     <div>

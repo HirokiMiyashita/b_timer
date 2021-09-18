@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@aws-amplify/api": "^4.0.15",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@mui/material": "^5.0.0",
     "@types/react-burger-menu": "^2.8.1",
     "@types/react-lottie": "^1.2.6",
+    "@types/styled-components": "^5.1.14",
     "firebase": "^8.10.0",
     "next": "11.1.0",
     "react": "17.0.2",
@@ -21,7 +25,9 @@
     "react-dom": "17.0.2",
     "react-fireclient": "^0.4.4",
     "react-lottie": "^1.2.3",
-    "react-query": "^3.21.1"
+    "react-query": "^3.21.1",
+    "react-table": "^7.7.0",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@types/react": "17.0.19",
